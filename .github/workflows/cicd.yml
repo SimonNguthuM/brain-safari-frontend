@@ -44,11 +44,11 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
 
-      - name: Merge dev into main
+      - name: Merge dev into main (dev content replaces main)
         run: |
           git fetch origin
           git checkout main
-          git merge dev --no-ff --allow-unrelated-histories -X theirs
+          git merge dev --no-ff --allow-unrelated-histories -X theirs  # This ensures `dev`'s content takes precedence
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
