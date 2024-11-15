@@ -53,7 +53,7 @@ const SignUp = () => {
 
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5555/signup', {
+      const response = await fetch('https://brain-safari-backend.onrender.com/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
