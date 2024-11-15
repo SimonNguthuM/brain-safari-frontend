@@ -138,7 +138,7 @@ const SignUp = () => {
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
           />
         </div>
-        <button type="submit" className="w-full py-3 bg-coral-500 text-white rounded-full hover:bg-coral-600 transition" disabled={loading}>
+        <button type="submit"  className="w-full py-3 bg-green-500 text-white rounded-full hover:bg-green-600 transition" disabled={loading}>
           {loading ? 'Signing Up...' : 'Sign Up'}
         </button>
         {error && <p className="text-red-500 text-center mt-4">{error}</p>}
