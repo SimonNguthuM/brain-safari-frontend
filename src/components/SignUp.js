@@ -91,57 +91,60 @@ const SignUp = () => {
   };
 
   return (
-    <form className='signup-form' onSubmit={handleSubmit}>
-      <div className='input-group'>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={formData.username}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
-      <div className='input-group'>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
-      <div className='input-group'>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={formData.password}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
-      <div className='input-group'>
-        <label htmlFor="confirmPassword">Confirm Password:</label>
-        <input
-          type="password"
-          id="confirmPassword"
-          name="confirmPassword"
-          value={formData.confirmPassword}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
-      <button className='signup-btn' type="submit" disabled={loading}>
-        {loading ? 'Signing Up...' : 'Sign Up'}
-      </button>
-      {error && <p style={{ color: 'red' }} aria-live="assertive">{error}</p>}
-      {success && <p style={{ color: 'green' }} aria-live="polite">{success}</p>}
-    </form>
+    <div className="min-h-screen bg-gradient-to-r from-teal-300 to-coral-300 flex justify-center items-center">
+      <form className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md" onSubmit={handleSubmit}>
+        <h2 className="text-2xl font-bold text-teal-700 mb-4">Sign Up</h2>
+        <div className="input-group mb-4">
+          <label htmlFor="username" className="block text-teal-700">Username:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleInputChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+          />
+        </div>
+        <div className="input-group mb-4">
+          <label htmlFor="email" className="block text-teal-700">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+          />
+        </div>
+        <div className="input-group mb-4">
+          <label htmlFor="password" className="block text-teal-700">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+          />
+        </div>
+        <div className="input-group mb-6">
+          <label htmlFor="confirmPassword" className="block text-teal-700">Confirm Password:</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleInputChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+          />
+        </div>
+        <button type="submit"  className="w-full py-3 bg-green-500 text-white rounded-full hover:bg-green-600 transition" disabled={loading}>
+          {loading ? 'Signing Up...' : 'Sign Up'}
+        </button>
+        {error && <p className="text-red-500 text-center mt-4">{error}</p>}
+        {success && <p className="text-green-500 text-center mt-4">{success}</p>}
+      </form>
+    </div>
   );
 };
 
