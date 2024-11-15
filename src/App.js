@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const user = Cookies.get("username");
@@ -20,15 +21,16 @@ const App = () => {
     Cookies.set("username", loggedInUser);
   };
 
-  // const handleLogout = () => {
-  //   setIsAuthenticated(false);
-  //   setUsername(null);
-  //   Cookies.remove("username");
-  // };
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setUsername(null);
+    Cookies.remove("username");
+    navigate("/");
+  };
 
   return (
     <>
-    <Outlet context={{ handleLogin, isAuthenticated, username }} />
+      <Outlet context={{ handleLogin, handleLogout, isAuthenticated, username }} />
     </>
   );
 };
