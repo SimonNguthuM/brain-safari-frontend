@@ -4,7 +4,7 @@ import '../index.css';
 
 const Achievements = () => {
   const [achievements, setAchievements] = useState([]);
-  const { username } = useOutletContext();
+  const { username, handleLogout } = useOutletContext();
 
   useEffect(() => {
     const fetchAchievements = async () => {
@@ -23,38 +23,40 @@ const Achievements = () => {
   }, [username]);
 
   return (
-    <div className="achievements-dashboard">
-      <h2>{username}</h2>
-      <p>Kenya</p>
-      <p>{username}@gmail.com</p>
+    <div className="min-h-screen bg-gradient-to-r from-teal-300 to-coral-300 flex flex-col justify-center items-center py-10">
+      {}
+      <div className="w-full px-6 py-4 bg-teal-700 flex justify-between items-center">
+        {}
+        <button
+          onClick={handleLogout}
+          className="text-white bg-red-500 hover:bg-red-700 py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-300"
+        >
+          Logout
+        </button>
+        <h1 className="text-white text-2xl font-bold">Achievements</h1>
+      </div>
 
-      <div className="badges-section">
-        <h3>Badges</h3>
-        <div className="badges">
-          {achievements.map((achievement) => (
-            <div key={achievement.id} className="badge">
-              <img src={achievement.icon_url} alt={achievement.name} />
-              <span>{achievement.name}</span>
-            </div>
-          ))}
+      {}
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md text-center mt-8">
+        <h2 className="text-3xl font-bold text-teal-700 mb-4">{username}</h2>
+        <p className="text-lg text-teal-600 mb-2">Kenya</p>
+        <p className="text-lg text-teal-600 mb-6">{username}@gmail.com</p>
+
+        <div className="badges-section mb-6">
+          <h3 className="text-2xl font-semibold text-teal-700 mb-4">Badges</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {achievements.map((achievement) => (
+              <div key={achievement.id} className="badge p-4 bg-teal-100 rounded-lg shadow-md text-center">
+                <img
+                  src={achievement.icon_url}
+                  alt={achievement.name}
+                  className="mx-auto mb-2 w-16 h-16 object-contain"
+                />
+                <span className="block text-teal-700 font-medium">{achievement.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-
-      <div className="points-section">
-        <h3>Points</h3>
-        <p>600</p>
-      </div>
-
-      <div className="leaderboard">
-        <h3>Leaderboard</h3>
-        <ul>
-          <li>Ez - 1,000 points</li>
-          <li>Ef - 900 points</li>
-          <li>Ed - 870 points</li>
-          <li>Edd - 810 points</li>
-          <li>El - 780 points</li>
-          <li>Es - 750 points</li>
-        </ul>
       </div>
     </div>
   );
