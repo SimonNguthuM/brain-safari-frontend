@@ -21,7 +21,7 @@ const Login = () => {
     onSubmit: async (values) => {
       setError("");
       try {
-        const response = await fetch("http://localhost:5555/login", {
+        const response = await fetch('https://brain-safari-backend.onrender.com/login', {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(values),
