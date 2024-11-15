@@ -1,20 +1,36 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Home from './components/Home';
+import React, { useState, useEffect } from "react";
+import { Outlet } from "react-router-dom";
+import Cookies from "js-cookie";
 
-function App() {
+const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState(null);
+
+  useEffect(() => {
+    const user = Cookies.get("username");
+    if (user) {
+      setIsAuthenticated(true);
+      setUsername(user);
+    }
+  }, []);
+
+  const handleLogin = (loggedInUser) => {
+    setIsAuthenticated(true);
+    setUsername(loggedInUser);
+    Cookies.set("username", loggedInUser);
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setUsername(null);
+    Cookies.remove("username");
+  };
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
-    </Router>
+    <>
+    <Outlet context={{ handleLogin, isAuthenticated, username }} />
+    </>
   );
 };
 
 export default App;
-
