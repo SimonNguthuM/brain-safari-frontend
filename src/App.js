@@ -1,12 +1,16 @@
-import React from 'react';
-import Home from './components/Home'; 
+import React from "react";
+import Home from "./components/Home";
 
 function App() {
   return (
-    <div>
-      <h1>Wassaaaa</h1>
-      <Home />  
-    </div>
+    <UserProvider>
+      <Router>
+        <Routes>
+          <Route path="/quizzes/:quiz_id/content" element={<QuizContent />} />
+          <Route path="/quizzes/:quiz_id/submit" element={<QuizSubmission />} />
+        </Routes>
+      </Router>
+    </UserProvider>
   );
 }
 
