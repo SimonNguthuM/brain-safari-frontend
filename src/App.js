@@ -20,11 +20,11 @@ const App = () => {
     Cookies.set("username", loggedInUser);
   };
 
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-    setUsername(null);
-    Cookies.remove("username");
-  };
+  // const handleLogout = () => {
+  //   setIsAuthenticated(false);
+  //   setUsername(null);
+  //   Cookies.remove("username");
+  // };
 
   return (
     <>

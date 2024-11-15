@@ -5,6 +5,7 @@ import Home from "../src/components/Home";
 import Login from "../src/components/Login";
 import SignUp from "../src/components/SignUp";
 import App from "./App"; 
+import './index.css'; 
 
 const router = createBrowserRouter([
   { 
