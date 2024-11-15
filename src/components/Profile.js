@@ -1,7 +1,7 @@
 // Profile.js
 import React from "react";
 import { Link, useOutletContext } from "react-router-dom";
-import "./Profile.css";
+import "../index.css";
 
 const Profile = () => {
   const { username, handleLogout } = useOutletContext();
