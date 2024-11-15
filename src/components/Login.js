@@ -33,7 +33,7 @@ const Login = () => {
           Cookies.set("username", data.user);
           
           handleLogin(data.user);
-          navigate("/");
+          navigate("/profile");
         } else {
           const errorData = await response.json();
           setError(errorData.message || "Invalid email or password");
