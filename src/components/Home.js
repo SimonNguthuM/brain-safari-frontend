@@ -12,7 +12,6 @@ function Home() {
           <Link to="/courses" className="text-gray-700 hover:text-coral-500 transition">Courses</Link>
           <Link to="/mentors" className="text-gray-700 hover:text-coral-500 transition">Mentors</Link>
           <Link to="/community" className="text-gray-700 hover:text-coral-500 transition">Community</Link>
-          <Link to="/profile" className="text-gray-700 hover:text-coral-500 transition">Profile</Link>
           <Link to="/login" className="text-teal-500 hover:text-teal-600 mx-2 transition">Login</Link>
           <Link to="/signup" className="text-coral-500 hover:text-coral-600 mx-2 transition">Sign Up</Link>
         </div>
