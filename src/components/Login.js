@@ -79,7 +79,7 @@ const Login = () => {
             <p className="text-red-500 text-sm">{formik.errors.password}</p>
           ) : null}
         </div>
-        <button type="submit" className="w-full py-3 bg-coral-500 text-white rounded-full hover:bg-coral-600 transition">
+        <button type="submit"  className="w-full py-3 bg-green-500 text-white rounded-full hover:bg-green-600 transition" >
           Login
         </button>
         {error && <p className="text-red-500 text-center mt-4">{error}</p>}
