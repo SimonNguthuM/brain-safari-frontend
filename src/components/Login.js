@@ -17,6 +17,7 @@ const Login = () => {
       password: Yup.string().required("Password is required"),
     }),
     onSubmit: async (values) => {
+      console.log("Submitting values:", values);
       try {
         const response = await axios.post(
           "https://brain-safari-backend.onrender.com/login",
@@ -25,9 +26,11 @@ const Login = () => {
             withCredentials: true,
           }
         );
+        console.log("Response data:", response.data);
         alert(response.data.message);
         navigate("/profile");
       } catch (error) {
+        console.error("Error response:", error.response);
         alert(error.response?.data?.error || "Login failed");
       }
     },
