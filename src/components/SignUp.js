@@ -20,7 +20,7 @@ const Signup = () => {
     }),
     onSubmit: async (values, { resetForm }) => {
       try {
-        const response = await axios.post('http://127.0.0.1:5555/signup', values);
+        const response = await axios.post('https://brain-safari-backend.onrender.com/signup', values);
         alert(response.data.message);
         resetForm();
         navigate('/login'); 

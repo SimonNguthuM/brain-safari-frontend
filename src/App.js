@@ -24,7 +24,7 @@ const App = () => {
   useEffect(() => {
     const authenticateUser = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:5555/authenticate", {
+        const response = await fetch("https://brain-safari-backend.onrender.com/authenticate", {
           method: "GET",
           credentials: "include",
         });
@@ -49,7 +49,7 @@ const App = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5555/logout", {
+      const response = await fetch("https://brain-safari-backend.onrender.com/logout", {
         method: "POST",
         credentials: "include",
       });

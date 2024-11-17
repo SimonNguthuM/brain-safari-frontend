@@ -13,7 +13,7 @@ const Dashboard = () => {
 
       try {
         const response = await fetch(
-          `http://127.0.0.1:5555/users/${user.username}/achievements`,
+          `https://brain-safari-backend.onrender.com/users/${user.username}/achievements`,
           {
             method: "GET",
             credentials: "include",
