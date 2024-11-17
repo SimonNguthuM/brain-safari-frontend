@@ -24,11 +24,7 @@ const App = () => {
   useEffect(() => {
     const authenticateUser = async () => {
       try {
-        const response = await fetch("https://brain-safari-backend.onrender.com/authenticate", {
-          method: "GET",
-          credentials: "include",
-        });
-
+        const response = await fetch("/authenticate", { method: "GET", credentials: "include" });
         if (response.ok) {
           const userData = await response.json();
           console.log("Authenticated user data:", userData);
@@ -43,29 +39,28 @@ const App = () => {
         setIsAuthenticated(false);
       }
     };
-
-    authenticateUser();
-  }, [setUser]);
-
-  const handleLogout = async () => {
-    try {
-      const response = await fetch("https://brain-safari-backend.onrender.com/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-
-      if (response.ok) {
-        console.log("Logged out successfully");
-        setIsAuthenticated(false);
-        setUser(null);
-        navigate("/");
-      } else {
-        console.error("Error logging out:", await response.text());
-      }
-    } catch (error) {
-      console.error("Error logging out:", error);
+  
+    if (isAuthenticated === null) {
+      authenticateUser();
     }
-  };
+  }, [isAuthenticated, setUser]);
+  
+
+ const handleLogout = async () => {
+  try {
+    const response = await fetch("/logout", { method: "POST", credentials: "include" });
+    if (response.ok) {
+      console.log("Logged out successfully");
+      setIsAuthenticated(false);
+      setUser(null);
+      navigate("/");
+    } else {
+      console.error("Error logging out:", await response.text());
+    }
+  } catch (error) {
+    console.error("Error logging out:", error);
+  }
+};
 
   return (
     <>
