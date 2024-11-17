@@ -8,6 +8,7 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f7f7f7;
+  padding-top: 4rem;
 }
 
 /* Gradient Backgrounds */
@@ -82,13 +83,14 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
+  height: 4rem; /* Define navbar height explicitly */
   background-color: white;
   opacity: 0.95;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
+  padding: 0 1rem;
   z-index: 50;
   display: flex;
-  justify-content: space-between; /* Space out the logo and the nav links */
+  justify-content: space-between;
   align-items: center;
 }
 

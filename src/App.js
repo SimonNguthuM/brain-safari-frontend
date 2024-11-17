@@ -19,63 +19,64 @@ export const useUser = () => useContext(UserContext);
 const App = () => {
   const { user, setUser } = useUser();
   const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const authenticateUser = async () => {
       try {
-        const response = await fetch("/authenticate", { method: "GET", credentials: "include" });
+        const response = await fetch("https://brain-safari-backend.onrender.com/authenticate", {
+          method: "GET",
+          credentials: "include",
+        });
         if (response.ok) {
           const userData = await response.json();
           console.log("Authenticated user data:", userData);
           setUser(userData);
-          setIsAuthenticated(true);
         } else {
           console.error("Authentication failed:", await response.text());
-          setIsAuthenticated(false);
+          setUser(null);
         }
       } catch (error) {
         console.error("Error authenticating user:", error);
-        setIsAuthenticated(false);
+        setUser(null);
+      } finally {
+        setIsLoading(false);
       }
     };
-  
-    if (isAuthenticated === null) {
-      authenticateUser();
-    }
-  }, [isAuthenticated, setUser]);
-  
 
- const handleLogout = async () => {
-  try {
-    const response = await fetch("/logout", { method: "POST", credentials: "include" });
-    if (response.ok) {
-      console.log("Logged out successfully");
-      setIsAuthenticated(false);
-      setUser(null);
-      navigate("/");
+    if (user === null) {
+      authenticateUser();
     } else {
-      console.error("Error logging out:", await response.text());
+      setIsLoading(false);
     }
-  } catch (error) {
-    console.error("Error logging out:", error);
-  }
-};
+  }, [user, setUser]);
+
+  const handleLogout = async () => {
+    try {
+      console.log("Sending logout request...");
+      const response = await fetch("https://brain-safari-backend.onrender.com/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+      if (response.ok) {
+        console.log("Logged out successfully");
+        setUser(null);
+        navigate("/");
+      } else {
+        console.error("Error logging out:", await response.text());
+      }
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
 
   return (
     <>
-      {}
-      <Navbar />
-      {isAuthenticated === null ? (
+      <Navbar handleLogout={handleLogout} />
+      {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <Outlet
-          context={{
-            handleLogout,
-            isAuthenticated,
-            user,
-          }}
-        />
+        <Outlet context={{ handleLogout, user, isLoading }} />
       )}
     </>
   );
