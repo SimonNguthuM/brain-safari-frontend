@@ -1,69 +1,82 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
-import Cookies from "js-cookie";
+import React, { useState } from "react";
+import { useUser } from "./App";
+import Dashboard from "./Dashboard";
+import LearningPaths from "./LearningPaths/LearningPathsList";
+import Events from "./Events";
+import Community from "./Community";
+import Certificates from "./Certificates";
 
 const Profile = () => {
-  const [profile, setProfile] = useState(null);
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-  const { handleLogout } = useOutletContext();
+  const { user, isAuthenticated } = useUser();
+  const [activeComponent, setActiveComponent] = useState("Dashboard");
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const token = Cookies.get("auth_token");
-        const response = await fetch("https://brain-safari-backend.onrender.com/profile", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-          },
-        });
+  const componentsMap = {
+    Dashboard: <Dashboard />,
+    "Learning Paths": <LearningPaths />,
+    Events: <Events />,
+    Community: <Community />,
+    Certificates: <Certificates />,
+  };
 
-        if (response.ok) {
-          const data = await response.json();
-          setProfile(data);
-        } else {
-          const errorData = await response.json();
-          setError(errorData.message || "Failed to fetch profile.");
-        }
-      } catch (error) {
-        setError("An error occurred. Please try again.");
-      }
-    };
-
-    fetchProfile();
-  }, []);
-
-  if (error) {
-    return <p style={{ color: "red" }}>{error}</p>;
-  }
-
-  if (!profile) {
-    return <p>Loading...</p>;
+  if (!isAuthenticated) {
+    return <div>Please log in to access this page.</div>;
   }
 
   return (
-    <div className="profile-page">
-      <aside className="sidebar">
-        <button onClick={() => navigate("/")} className="sidebar-button">Dashboard</button>
-        <button onClick={() => navigate("/events")} className="sidebar-button">Events</button>
-        <button onClick={() => navigate("/community")} className="sidebar-button">Community</button>
-        <button onClick={() => navigate("/certificates")} className="sidebar-button">Certificates</button>
-        <button onClick={() => navigate("/learning-paths")} className="sidebar-button">Learning Paths</button>
-        <button onClick={handleLogout} className="logout-button">Logout</button>
-      </aside>
-      
-      <main className="profile-content">
-        <div className="profile-header">
-          <h2>{profile.username}</h2>
+    <div className="profile-container">
+      {}
+      <div className="navbar">
+        <div className="brand-logo">Brainsafari</div>
+        <div className="user-info">
+          <span>{new Date().toLocaleDateString()}</span>
+          <div className="settings">
+            <span>🔔</span>
+            <span>⚙️</span>
+          </div>
+          <div className="username">{user?.name}</div>
         </div>
-        <div className="profile-info">
-          <p><strong>Username:</strong> {profile.username}</p>
-          <p><strong>Email:</strong> {profile.email}</p>
-          <p><strong>Role:</strong> {profile.role}</p>
+      </div>
+
+      {}
+      <div className="content">
+        <div className="sidebar">
+          <button
+            onClick={() => setActiveComponent("Dashboard")}
+            className={activeComponent === "Dashboard" ? "active" : ""}
+          >
+            Dashboard
+          </button>
+          <button
+            onClick={() => setActiveComponent("Learning Paths")}
+            className={activeComponent === "Learning Paths" ? "active" : ""}
+          >
+            Learning Paths
+          </button>
+          <button
+            onClick={() => setActiveComponent("Events")}
+            className={activeComponent === "Events" ? "active" : ""}
+          >
+            Events
+          </button>
+          <button
+            onClick={() => setActiveComponent("Community")}
+            className={activeComponent === "Community" ? "active" : ""}
+          >
+            Community
+          </button>
+          <button
+            onClick={() => setActiveComponent("Certificates")}
+            className={activeComponent === "Certificates" ? "active" : ""}
+          >
+            Certificates
+          </button>
         </div>
-      </main>
+
+        {}
+        <div className="main-content">
+          {componentsMap[activeComponent]}
+        </div>
+      </div>
     </div>
   );
 };
