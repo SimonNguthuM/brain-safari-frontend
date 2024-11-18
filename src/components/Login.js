@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../App";
 
 const Login = () => {
-  const { setUser } = useUser(); // Access setUser from context
+  const { setUser } = useUser();
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -27,9 +27,9 @@ const Login = () => {
         );
 
         const userData = response.data;
-        setUser(userData); // Update user context
+        setUser(userData);
 
-        navigate("/"); // Redirect to homepage
+        navigate("/");
       } catch (error) {
         alert(error.response?.data?.error || "Login failed");
       }

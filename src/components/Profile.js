@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import Dashboard from "./Dashboard"; 
+import Dashboard from "./Dashboard";
 import Events from "./Events";
 import Community from "./Community";
 import Certificates from "./Certificates";
+import Content from "./Content";
 
 const Profile = () => {
-  const [activeComponent, setActiveComponent] = useState(null); // No default active component
+  const [activeComponent, setActiveComponent] = useState(null);
 
   const componentsMap = {
     Dashboard: <Dashboard />,
-    // "Learning Paths": <LearningPaths />,
+    Content: <Content />, 
     Events: <Events />,
     Community: <Community />,
     Certificates: <Certificates />,
