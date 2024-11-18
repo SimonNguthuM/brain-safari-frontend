@@ -35,7 +35,11 @@ const CreateLearningPath = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [modules, setModules] = useState([
-    { title: "", description: "", resources: [{ title: "", url: "", type: "", description: "" }] },
+    {
+      title: "",
+      description: "",
+      resources: [{ title: "", url: "", type: "", description: "" }],
+    },
   ]);
   const [formErrors, setFormErrors] = useState([]);
 
@@ -47,37 +51,60 @@ const CreateLearningPath = () => {
 
   const handleResourceChange = (moduleIndex, resourceIndex, e) => {
     const newModules = [...modules];
-    newModules[moduleIndex].resources[resourceIndex][e.target.name] = e.target.value;
+    newModules[moduleIndex].resources[resourceIndex][e.target.name] =
+      e.target.value;
     setModules(newModules);
   };
 
   const addModule = () => {
     setModules([
       ...modules,
-      { title: "", description: "", resources: [{ title: "", url: "", type: "", description: "" }] },
+      {
+        title: "",
+        description: "",
+        resources: [{ title: "", url: "", type: "", description: "" }],
+      },
     ]);
   };
 
   const addResource = (moduleIndex) => {
     const newModules = [...modules];
-    newModules[moduleIndex].resources.push({ title: "", url: "", type: "", description: "" });
+    newModules[moduleIndex].resources.push({
+      title: "",
+      url: "",
+      type: "",
+      description: "",
+    });
     setModules(newModules);
   };
 
   const validateForm = () => {
     const errors = [];
-    
+
     // Check if title or description is empty
     if (!title.trim()) errors.push("Learning path title is required.");
-    if (!description.trim()) errors.push("Learning path description is required.");
+    if (!description.trim())
+      errors.push("Learning path description is required.");
 
     // Check if all modules and resources are filled
     modules.forEach((module, moduleIndex) => {
-      if (!module.title.trim()) errors.push(`Module ${moduleIndex + 1} title is required.`);
-      if (!module.description.trim()) errors.push(`Module ${moduleIndex + 1} description is required.`);
+      if (!module.title.trim())
+        errors.push(`Module ${moduleIndex + 1} title is required.`);
+      if (!module.description.trim())
+        errors.push(`Module ${moduleIndex + 1} description is required.`);
       module.resources.forEach((resource, resourceIndex) => {
-        if (!resource.title.trim()) errors.push(`Resource ${resourceIndex + 1} in Module ${moduleIndex + 1} title is required.`);
-        if (!resource.url.trim()) errors.push(`Resource ${resourceIndex + 1} in Module ${moduleIndex + 1} URL is required.`);
+        if (!resource.title.trim())
+          errors.push(
+            `Resource ${resourceIndex + 1} in Module ${
+              moduleIndex + 1
+            } title is required.`
+          );
+        if (!resource.url.trim())
+          errors.push(
+            `Resource ${resourceIndex + 1} in Module ${
+              moduleIndex + 1
+            } URL is required.`
+          );
       });
     });
 
@@ -109,7 +136,11 @@ const CreateLearningPath = () => {
         setTitle("");
         setDescription("");
         setModules([
-          { title: "", description: "", resources: [{ title: "", url: "", type: "", description: "" }] },
+          {
+            title: "",
+            description: "",
+            resources: [{ title: "", url: "", type: "", description: "" }],
+          },
         ]);
       })
       .catch(console.error);
@@ -173,7 +204,9 @@ const CreateLearningPath = () => {
                 placeholder="Resource Title"
                 name="title"
                 value={resource.title}
-                onChange={(e) => handleResourceChange(moduleIndex, resourceIndex, e)}
+                onChange={(e) =>
+                  handleResourceChange(moduleIndex, resourceIndex, e)
+                }
                 className={resource.title.trim() === "" ? "error" : ""}
               />
               <input
@@ -181,7 +214,9 @@ const CreateLearningPath = () => {
                 placeholder="Resource URL"
                 name="url"
                 value={resource.url}
-                onChange={(e) => handleResourceChange(moduleIndex, resourceIndex, e)}
+                onChange={(e) =>
+                  handleResourceChange(moduleIndex, resourceIndex, e)
+                }
                 className={resource.url.trim() === "" ? "error" : ""}
               />
               <input
@@ -189,13 +224,17 @@ const CreateLearningPath = () => {
                 placeholder="Resource Type (Video, Article, etc.)"
                 name="type"
                 value={resource.type}
-                onChange={(e) => handleResourceChange(moduleIndex, resourceIndex, e)}
+                onChange={(e) =>
+                  handleResourceChange(moduleIndex, resourceIndex, e)
+                }
               />
               <textarea
                 placeholder="Resource Description"
                 name="description"
                 value={resource.description}
-                onChange={(e) => handleResourceChange(moduleIndex, resourceIndex, e)}
+                onChange={(e) =>
+                  handleResourceChange(moduleIndex, resourceIndex, e)
+                }
               />
             </div>
           ))}
