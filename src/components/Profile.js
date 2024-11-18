@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import Dashboard from "./Dashboard";
 import Events from "./Events";
 import Community from "./Community";
 import Certificates from "./Certificates";
 import Content from "./Content";
+import Achievements from "./Achievements";
 
 const Profile = () => {
-  const [activeComponent, setActiveComponent] = useState(null);
+  const [activeComponent, setActiveComponent] = useState("Dashboard");
 
   const componentsMap = {
-    Dashboard: <Dashboard />,
-    Content: <Content />, 
+    Dashboard: <Achievements />,
+    Content: <Content />,
     Events: <Events />,
     Community: <Community />,
     Certificates: <Certificates />,
@@ -31,7 +31,11 @@ const Profile = () => {
           ))}
         </div>
         <div className="main-content">
-          {activeComponent ? componentsMap[activeComponent] : <p>Select a section to view content.</p>}
+          {activeComponent ? (
+            componentsMap[activeComponent]
+          ) : (
+            <p>Select a section to view content.</p>
+          )}
         </div>
       </div>
     </div>
