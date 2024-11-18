@@ -57,6 +57,7 @@ function Home() {
               infiniteLoop
               showStatus={false}
               showThumbs={false}
+              showArrows={false}
               useKeyboardArrows
               transitionTime={500}
               stopOnHover={false}
