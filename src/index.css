@@ -355,6 +355,7 @@ form .btn:hover {
   display: flex;
   flex: 1;
   overflow: hidden;
+  min-height: 100vh;
 }
 
 .profile-container .sidebar {
@@ -362,7 +363,17 @@ form .btn:hover {
   background: #f3f4f6;
   padding: 1rem;
   box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+  position: sticky; /* Ensure the sidebar sticks as the user scrolls */
+  top: 0;
 }
+
+.profile-container .main-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f7f7f7;
+  overflow-y: auto;
+}
+
 
 .profile-container .sidebar button {
   background: none;
@@ -384,13 +395,6 @@ form .btn:hover {
 .profile-container .sidebar button:hover {
   background-color: #4fd1c5;
   color: white;
-}
-
-.profile-container .main-content {
-  flex: 1;
-  padding: 2rem;
-  overflow-y: auto;
-  background: #f7f7f7;
 }
 
 /* Dashboard Styles */
@@ -489,7 +493,3 @@ form .btn:hover {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-/* src/index.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
