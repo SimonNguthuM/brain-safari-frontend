@@ -11,18 +11,14 @@ import Certificates from "./components/Certificates";
 import Community from "./components/Community";
 import Points from "./components/Points";
 import LeaderBoard from "./components/LeaderBoard";
-import LearningPathsList from "./components/LearningPaths/LearningPathsList";
-// import CreateLearningPath from "../src/components/LearningPaths/CreateLearningPath";
-// import EnrollLearningPath from "../src/components/LearningPaths/EnrollLearningPath";
-// import LearningPathModules from "../src/components/LearningPaths/LearningPathModules";
-// import CreateModule from "../src/components/Modules/CreateModule";
-// import ModuleResources from "../src/components/Modules/ModuleResources";
-// import CreateResource from "../src/components/Resources/CreateResource";
-import App, { UserProvider } from "./App"; // Import UserProvider
-import './index.css'; 
+// import LearnerPaths from "./components/LearnerPaths";
+// import ContributorPaths from "./components/ContributorPaths";
+// import AdminPage from "./components/AdminPage";
+import App, { UserProvider } from "./App";
+import './index.css';
 
 const router = createBrowserRouter([
-  { 
+  {
     path: "/",
     element: <App />,
     children: [
@@ -30,19 +26,15 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <SignUp /> },
       { path: "/profile", element: <Profile /> },
-      { path: "/Dashboard", element: <Dashboard /> },
-      { path: "/learning_paths", element: <LearningPathsList /> },
+      { path: "/dashboard", element: <Dashboard /> },
       { path: "/events", element: <Events /> },
       { path: "/certificates", element: <Certificates /> },
       { path: "/community", element: <Community /> },
       { path: "/points", element: <Points /> },
       { path: "/leaderboard", element: <LeaderBoard /> },
-      // { path: "/learning_paths/create", element: <CreateLearningPath /> },
-      // { path: "/learning_path/:learning_path_id/enroll", element: <EnrollLearningPath /> },
-      // { path: "/learning_path/:learning_path_id/modules", element: <LearningPathModules /> },
-      // { path: "/learning_path/:learning_path_id/module/create", element: <CreateModule /> },
-      // { path: "/module/:module_id/resources", element: <ModuleResources /> },
-      // { path: "/module/:module_id/resource/create", element: <CreateResource /> },
+      // { path: "/learner_paths", element: <LearnerPaths /> }, // Learner's specific path
+      // { path: "/contributor_paths", element: <ContributorPaths /> }, // Contributor's specific path
+      // { path: "/admin_paths", element: <AdminPage /> }, // Admin's specific path
     ],
   },
 ]);
@@ -52,4 +44,4 @@ root.render(
   <UserProvider>
     <RouterProvider router={router} />
   </UserProvider>
-); 
+);

@@ -3,8 +3,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../App";
 
 const Login = () => {
+  const { setUser } = useUser(); // Access setUser from context
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -17,20 +19,18 @@ const Login = () => {
       password: Yup.string().required("Password is required"),
     }),
     onSubmit: async (values) => {
-      console.log("Submitting values:", values);
       try {
         const response = await axios.post(
           "https://brain-safari-backend.onrender.com/login",
           values,
-          {
-            withCredentials: true,
-          }
+          { withCredentials: true }
         );
-        console.log("Response data:", response.data);
-        alert(response.data.message);
-        navigate("/profile");
+
+        const userData = response.data;
+        setUser(userData); // Update user context
+
+        navigate("/"); // Redirect to homepage
       } catch (error) {
-        console.error("Error response:", error.response);
         alert(error.response?.data?.error || "Login failed");
       }
     },
