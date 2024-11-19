@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import Events from "./Events";
 import Community from "./Community";
-import Certificates from "./Certificates";
 import Content from "./Content";
 import Achievements from "./Achievements";
 
@@ -11,9 +9,7 @@ const Profile = () => {
   const componentsMap = {
     Dashboard: <Achievements />,
     Content: <Content />,
-    Events: <Events />,
     Community: <Community />,
-    Certificates: <Certificates />,
   };
 
   return (
