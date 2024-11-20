@@ -9,10 +9,12 @@ import Dashboard from "./components/Dashboard";
 import Events from "./components/Events";
 import Certificates from "./components/Certificates";
 import Community from "./components/Community";
+import Feedback from "./components/Feedback";
+import Challenge from "./components/Challenge";
 import LeaderBoard from "./components/LeaderBoard";
 import AdminUserManagement from "./components/AdminUserManagement";
 import App, { UserProvider } from "./App";
-import './index.css';
+import "./index.css";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +24,8 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <SignUp /> },
-
+      { path: "/feedback", element: <Feedback /> },
+      { path: "/challenge", element: <Challenge /> },
       { path: "/profile", element: <Profile /> },
       { path: "/dashboard", element: <Dashboard /> },
       { path: "/events", element: <Events /> },
