@@ -1,7 +1,7 @@
 function Dashboard(){
-  <>
-  <p>Dashboard</p>
-  </>
+    <>
+    <p>Dashboard</p>
+    </>
 }
 
 export default Dashboard
