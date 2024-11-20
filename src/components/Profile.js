@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Dashboard from "./Dashboard";
+import Achievements from "./Achievements";
 import Community from "./Community";
 import Content from "./Content";
 
 const Profile = () => {
   const componentsMap = {
-    Dashboard: <Dashboard />,
+    Dashboard: <Achievements />,
     Content: <Content />,
     Community: <Community />,
   };
