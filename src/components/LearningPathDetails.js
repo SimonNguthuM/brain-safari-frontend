@@ -45,7 +45,9 @@ const LearningPathDetails = ({ pathId, toggleView }) => {
               </li>
             ))}
           </ul>
-          {selectedModuleId && <ModuleDetails moduleId={selectedModuleId} />}
+          {selectedModuleId && (
+            <ModuleDetails moduleId={selectedModuleId} pathId={pathId} />
+          )}
         </div>
       )}
     </div>
