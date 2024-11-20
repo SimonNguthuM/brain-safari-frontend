@@ -1,6 +1,6 @@
 function Dashboard(){
     <>
-    <p>Dashboard</p>
+    <p>Event</p>
     </>
 }
 
