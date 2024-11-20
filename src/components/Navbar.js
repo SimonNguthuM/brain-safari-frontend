@@ -17,7 +17,6 @@ function Navbar({ handleLogout }) {
         {user ? (
           <>
             <span>{user.username}</span>
-            <span className="text-teal-500">{currentPage || "Dashboard"}</span> {}
             <button onClick={handleLogout} className="text-red-500">Logout</button>
           </>
         ) : (
