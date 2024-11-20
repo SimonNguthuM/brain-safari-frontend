@@ -21,12 +21,9 @@ const Feedback = () => {
 
   // Fetch resources for a selected module
   const fetchResources = (moduleId) => {
-    fetch(
-      `https://brain-safari-backend.onrender.com/modules/${moduleId}/resources`,
-      {
-        credentials: "include",
-      }
-    )
+    fetch(`https://brain-safari-backend.onrender.com/resources`, {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then(setResources)
       .catch(console.error);
@@ -95,28 +92,36 @@ const Feedback = () => {
 
       {/* Module Selection */}
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-gray-700 mb-2">
-          Select a Module
-        </h3>
-        <ul className="mb-4">
-          {modules.map((module) => (
-            <li
-              key={module.id}
-              className={`p-2 cursor-pointer rounded-lg ${
-                selectedModule?.id === module.id
-                  ? "bg-teal-500 text-white"
-                  : "bg-white text-teal-600 hover:bg-teal-100"
-              }`}
-              onClick={() => handleModuleSelect(module)}
-            >
-              {module.title} (ID: {module.id})
-            </li>
-          ))}
-        </ul>
+        {modules.length === 0 ? (
+          <p className="text-red-500">
+            No modules available. Check your connection.
+          </p>
+        ) : (
+          <>
+            <h3 className="text-lg font-semibold text-gray-700 mb-2">
+              Select a Module
+            </h3>
+            <ul className="mb-4">
+              {modules.map((module) => (
+                <li
+                  key={module.id}
+                  className={`p-2 cursor-pointer rounded-lg ${
+                    selectedModule?.id === module.id
+                      ? "bg-teal-500 text-white"
+                      : "bg-white text-teal-600 hover:bg-teal-100"
+                  }`}
+                  onClick={() => handleModuleSelect(module)}
+                >
+                  {module.title} (ID: {module.id})
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
 
       {/* Resource Selection */}
-      {selectedModule && (
+      {selectedModule && resources.length > 0 && (
         <div className="mb-6">
           <h3 className="text-lg font-semibold text-gray-700 mb-2">
             Resources in {selectedModule.title}
@@ -145,8 +150,6 @@ const Feedback = () => {
           <h3 className="text-lg font-semibold text-teal-600 mb-4">
             Feedback for: {selectedResource.title}
           </h3>
-
-          {/* Feedback List */}
           <ul className="space-y-4">
             {feedbackList.map((feedback) => (
               <li key={feedback.id} className="bg-white shadow p-4 rounded-lg">
@@ -156,7 +159,6 @@ const Feedback = () => {
             ))}
           </ul>
 
-          {/* Add Feedback */}
           <form onSubmit={handleFeedbackSubmit} className="mt-6">
             <textarea
               className="w-full p-2 border rounded-lg"
