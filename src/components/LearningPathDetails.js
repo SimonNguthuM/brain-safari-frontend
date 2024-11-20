@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
 import ModuleDetails from "./ModuleDetails";
 
-const LearningPathDetails = ({ pathId }) => {
+const LearningPathDetails = ({ pathId, toggleView }) => {
   const [modules, setModules] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedModuleId, setSelectedModuleId] = useState(null);
 
   useEffect(() => {
     const fetchModules = async () => {
-      if (!pathId) {
-        console.error("No pathId provided");
-        return;
-      }
-
       try {
         const response = await fetch(`https://brain-safari-backend.onrender.com/learning-paths/${pathId}/modules`, {
           credentials: "include",
@@ -24,7 +19,7 @@ const LearningPathDetails = ({ pathId }) => {
           console.error("Failed to fetch modules");
         }
       } catch (error) {
-        console.error("Error fetching modules:", error);
+        console.error(error);
       } finally {
         setLoading(false);
       }
@@ -35,31 +30,23 @@ const LearningPathDetails = ({ pathId }) => {
 
   return (
     <div className="learning-path-details">
+      <button onClick={toggleView}>Back to Learning Paths</button>
       {loading ? (
         <p>Loading modules...</p>
       ) : (
         <div>
-          <h2>Modules in Learning Path</h2>
-          {modules.length > 0 ? (
-            <ul>
-              {modules.map((module) => (
-                <li key={module.id}>
-                  <button
-                    onClick={() => setSelectedModuleId(module.id)}
-                    style={{ background: "none", border: "none", color: "blue", cursor: "pointer" }}
-                  >
-                    {module.title}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No modules available for this learning path.</p>
-          )}
+          <h2>Modules</h2>
+          <ul>
+            {modules.map((module) => (
+              <li key={module.id}>
+                <button onClick={() => setSelectedModuleId(module.id)}>
+                  {module.title}
+                </button>
+              </li>
+            ))}
+          </ul>
+          {selectedModuleId && <ModuleDetails moduleId={selectedModuleId} />}
         </div>
-      )}
-      {selectedModuleId && (
-        <ModuleDetails moduleIdProp={selectedModuleId} />
       )}
     </div>
   );

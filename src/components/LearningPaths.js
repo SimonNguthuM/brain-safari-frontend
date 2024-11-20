@@ -7,6 +7,8 @@ const LearningPaths = () => {
   const [selectedPath, setSelectedPath] = useState(null);
   const [isEnrolledView, setIsEnrolledView] = useState(true);
 
+  const toggleView = () => setSelectedPath(null);
+
   useEffect(() => {
     fetch("https://brain-safari-backend.onrender.com/learning-paths", {
       credentials: "include",
@@ -35,22 +37,16 @@ const LearningPaths = () => {
       method: "POST",
       credentials: "include",
     })
-      .then((res) => {
-        if (res.ok) return res.json();
-        return res.json().then((err) => Promise.reject(err));
-      })
+      .then((res) => res.json())
       .then((data) => {
-        if (data && data.learning_path) {
+        if (data.learning_path) {
           setEnrolledPaths((prev) => [...prev, data.learning_path]);
-
           setAvailablePaths((prev) =>
             prev.filter((path) => path.id !== data.learning_path.id)
           );
         }
       })
-      .catch((error) => {
-        console.error("Error enrolling in path:", error);
-      });
+      .catch(console.error);
   };
 
   return (
@@ -94,7 +90,7 @@ const LearningPaths = () => {
           )}
         </div>
       ) : (
-        <LearningPathDetails pathId={selectedPath.id} />
+        <LearningPathDetails pathId={selectedPath.id} toggleView={toggleView} />
       )}
     </div>
   );
