@@ -1,20 +1,24 @@
-import React, { useState } from "react";
-import Events from "./Events";
-import Community from "./Community";
-import Certificates from "./Certificates";
-import Content from "./Content";
+import React, { useState, useEffect } from "react";
 import Achievements from "./Achievements";
+import Community from "./Community";
+import Content from "./Content";
 
 const Profile = () => {
-  const [activeComponent, setActiveComponent] = useState("Dashboard");
-
   const componentsMap = {
     Dashboard: <Achievements />,
     Content: <Content />,
-    Events: <Events />,
     Community: <Community />,
-    Certificates: <Certificates />,
   };
+
+  // Get the last active component from sessionStorage or default to "Dashboard"
+  const [activeComponent, setActiveComponent] = useState(() => {
+    return sessionStorage.getItem("activeComponent") || "Dashboard";
+  });
+
+  // Update sessionStorage whenever activeComponent changes
+  useEffect(() => {
+    sessionStorage.setItem("activeComponent", activeComponent);
+  }, [activeComponent]);
 
   return (
     <div className="profile-container">
@@ -31,11 +35,7 @@ const Profile = () => {
           ))}
         </div>
         <div className="main-content">
-          {activeComponent ? (
-            componentsMap[activeComponent]
-          ) : (
-            <p>Select a section to view content.</p>
-          )}
+          {componentsMap[activeComponent]}
         </div>
       </div>
     </div>
