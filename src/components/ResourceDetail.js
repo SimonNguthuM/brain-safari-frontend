@@ -13,17 +13,15 @@ const ResourceDetail = ({ resource }) => {
     }
   }, [resource]);
 
-  // Fetch feedback for a specific resource
   const fetchFeedback = (resourceId) => {
-    fetch(`https://brain-safari-backend.onrender.com/feedbacks?resource_id=${resourceId}`, {
+    fetch(`https://brain-safari-backend.onrender.com/resources/${resourceId}/feedbacks`, {
       credentials: "include",
     })
       .then((res) => res.json())
       .then(setFeedbackList)
-      .catch(console.error);
+      .catch((err) => console.error("Error fetching feedback:", err));
   };
 
-  // Submit new feedback
   const handleFeedbackSubmit = (e) => {
     e.preventDefault();
     if (!newFeedback) {
@@ -49,8 +47,9 @@ const ResourceDetail = ({ resource }) => {
             ...prev,
             {
               id: data.feedback_id,
-              comment: newFeedback,
-              rating: newRating,
+              comment: data.comment,
+              rating: data.rating,
+              created_at: new Date().toISOString(),
             },
           ]);
           setNewFeedback("");
@@ -59,7 +58,7 @@ const ResourceDetail = ({ resource }) => {
           alert("Error submitting feedback. Please try again.");
         }
       })
-      .catch(console.error);
+      .catch((err) => console.error("Error submitting feedback:", err));
   };
 
   if (!resource) {
@@ -77,8 +76,11 @@ const ResourceDetail = ({ resource }) => {
         {resource.description || "No description available."}
       </p>
 
-      {/* View Content */}
-      <button onClick={() => setShowContent((prev) => !prev)} className="bg-blue-600 text-white px-4 py-2 rounded-lg mt-4">
+      {}
+      <button
+        onClick={() => setShowContent((prev) => !prev)}
+        className="bg-blue-600 text-white px-4 py-2 rounded-lg mt-4"
+      >
         {showContent ? "Hide Content" : "View Content"}
       </button>
       {showContent && (
@@ -91,8 +93,11 @@ const ResourceDetail = ({ resource }) => {
         </div>
       )}
 
-      {/* Feedback Section */}
-      <button onClick={() => setShowFeedback((prev) => !prev)} className="bg-teal-600 text-white px-4 py-2 rounded-lg mt-4">
+      {}
+      <button
+        onClick={() => setShowFeedback((prev) => !prev)}
+        className="bg-teal-600 text-white px-4 py-2 rounded-lg mt-4"
+      >
         {showFeedback ? "Hide Feedback" : "View Feedback"}
       </button>
       {showFeedback && (
@@ -107,6 +112,7 @@ const ResourceDetail = ({ resource }) => {
             ))}
           </ul>
 
+          {}
           <form onSubmit={handleFeedbackSubmit} className="mt-4">
             <textarea
               value={newFeedback}
