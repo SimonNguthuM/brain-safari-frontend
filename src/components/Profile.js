@@ -7,15 +7,13 @@ const Profile = () => {
   const componentsMap = {
     Dashboard: <Achievements />,
     Content: <Content />,
-    Community: <Community />,
+    Community: <Community userId={1} />,
   };
 
-  // Get the last active component from sessionStorage or default to "Dashboard"
   const [activeComponent, setActiveComponent] = useState(() => {
     return sessionStorage.getItem("activeComponent") || "Dashboard";
   });
 
-  // Update sessionStorage whenever activeComponent changes
   useEffect(() => {
     sessionStorage.setItem("activeComponent", activeComponent);
   }, [activeComponent]);

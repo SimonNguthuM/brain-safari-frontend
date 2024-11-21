@@ -5,11 +5,10 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Profile from "./components/Profile";
-import Dashboard from "./components/Dashboard";
+import Achievements from "./components/Achievements";
 import Events from "./components/Events";
 import Certificates from "./components/Certificates";
 import Community from "./components/Community";
-import LeaderBoard from "./components/LeaderBoard";
 import AdminUserManagement from "./components/AdminUserManagement";
 import App, { UserProvider } from "./App";
 import './index.css';
@@ -24,12 +23,10 @@ const router = createBrowserRouter([
       { path: "/signup", element: <SignUp /> },
 
       { path: "/profile", element: <Profile /> },
-      { path: "/dashboard", element: <Dashboard /> },
+      { path: "/achievements", element: <Achievements /> },
       { path: "/events", element: <Events /> },
       { path: "/certificates", element: <Certificates /> },
       { path: "/community", element: <Community /> },
-      { path: "/leaderboard", element: <LeaderBoard /> },
-
       { path: "/admin/user-management", element: <AdminUserManagement /> },
     ],
   },
