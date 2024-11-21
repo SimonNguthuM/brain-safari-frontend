@@ -6,7 +6,7 @@ const Achievements = () => {
   const [achievements, setAchievements] = useState([]);
   const { user } = useOutletContext();
   const username = user?.username;
-
+  const points = user?.points || 0; 
   useEffect(() => {
     const fetchAchievements = async () => {
       try {
@@ -63,7 +63,7 @@ const Achievements = () => {
         </div>
         <div className="points-section">
           <h3>Points</h3>
-          <p>0</p>
+          <p>{points}</p> {/* Display the user's points */}
         </div>
       </div>
 
