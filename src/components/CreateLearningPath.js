@@ -125,7 +125,6 @@ const CreateLearningPath = () => {
   
     setFormErrors([]);
   
-    // 1. Create learning path
     fetch("https://brain-safari-backend.onrender.com/learning-paths", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -136,7 +135,6 @@ const CreateLearningPath = () => {
       .then((createdLearningPath) => {
         const quizPromises = [];
   
-        
         createdLearningPath.modules.forEach((module, moduleIndex) => {
           module.quizzes.forEach((quiz) => {
             const quizPromise = fetch(`https://brain-safari-backend.onrender.com/modules/${module.id}/quizzes`, {
@@ -163,7 +161,6 @@ const CreateLearningPath = () => {
           });
         });
   
-        // Wait for all quiz creation promises to resolve
         Promise.all(quizPromises)
           .then(() => {
             alert("Learning path and quizzes created!");
@@ -177,7 +174,6 @@ const CreateLearningPath = () => {
       })
       .catch(console.error);
   };
-  
 
   return (
     <div>
