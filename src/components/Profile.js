@@ -3,15 +3,18 @@ import Achievements from "./Achievements";
 import Community from "./Community";
 import Content from "./Content";
 
-const Profile = () => {
+const Profile = ({ user }) => {
+  const isContributor = user?.role === "Contributor";
+
   const componentsMap = {
-    Dashboard: <Achievements />,
+    ...(isContributor ? {} : { Dashboard: <Achievements /> }),
     Content: <Content />,
-    Community: <Community userId={1} />,
+    Community: <Community userId={user?.id || 1} />,
   };
 
   const [activeComponent, setActiveComponent] = useState(() => {
-    return sessionStorage.getItem("activeComponent") || "Dashboard";
+    const defaultComponent = isContributor ? "Content" : "Dashboard";
+    return sessionStorage.getItem("activeComponent") || defaultComponent;
   });
 
   useEffect(() => {
@@ -32,9 +35,7 @@ const Profile = () => {
             </button>
           ))}
         </div>
-        <div className="main-content">
-          {componentsMap[activeComponent]}
-        </div>
+        <div className="main-content">{componentsMap[activeComponent]}</div>
       </div>
     </div>
   );
