@@ -19,18 +19,16 @@ function Home() {
                 potential with our innovative learning platform.
               </p>
               <div className="space-x-4">
-                <Link to="/get-started" className="btn-primary">
+                <Link to="/signup" className="btn-primary">
                   Get Started
                 </Link>
-                <Link to="/learn-more" className="btn-secondary">
+                <Link to="/about" className="btn-secondary">
                   Learn More
                 </Link>
               </div>
             </div>
           </section>
 
-          {}
-          {}
           <section className="courses">
             <div className="course-card">
               <div className="course-content">
@@ -42,9 +40,6 @@ function Home() {
                 <div className="progress-bar">
                   <div className="progress" style={{ width: "75%" }}></div>
                 </div>
-                <Link to="/courses/philosophy" className="btn">
-                  Learn More
-                </Link>
               </div>
             </div>
             <div className="course-card">
@@ -57,9 +52,6 @@ function Home() {
                 <div className="progress-bar">
                   <div className="progress" style={{ width: "50%" }}></div>
                 </div>
-                <Link to="/courses/mathematics" className="btn">
-                  Learn More
-                </Link>
               </div>
             </div>
             <div className="course-card">
@@ -69,9 +61,6 @@ function Home() {
                 <div className="progress-bar">
                   <div className="progress" style={{ width: "90%" }}></div>
                 </div>
-                <Link to="/courses/writing" className="btn">
-                  Learn More
-                </Link>
               </div>
             </div>
           </section>
