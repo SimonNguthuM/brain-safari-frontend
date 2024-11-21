@@ -38,6 +38,24 @@ const AdminUserManagement = () => {
     }
   };
 
+  const deleteUser = async (userId) => {
+    if (!window.confirm("Are you sure you want to delete this user?")) return;
+
+    try {
+      const response = await fetch("https://brain-safari-backend.onrender.com/admin/users", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ user_id: userId }),
+      });
+      if (!response.ok) throw new Error("Failed to delete user");
+      alert("User deleted successfully.");
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -63,16 +81,28 @@ const AdminUserManagement = () => {
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>{user.role}</td>
-              <td>
+              <td className="flex space-x-2">
                 {user.role === "Learner" ? (
-                  <button onClick={() => changeRole(user.id, "Contributor")}>
+                  <button
+                    onClick={() => changeRole(user.id, "Contributor")}
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+                  >
                     Make Contributor
                   </button>
                 ) : (
-                  <button onClick={() => changeRole(user.id, "Learner")}>
+                  <button
+                    onClick={() => changeRole(user.id, "Learner")}
+                    className="bg-green-600 text-white px-4 py-2 rounded-lg"
+                  >
                     Make Learner
                   </button>
                 )}
+                <button
+                  onClick={() => deleteUser(user.id)}
+                  className="bg-red-600 text-white px-4 py-2 rounded-lg"
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
