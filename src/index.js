@@ -9,6 +9,7 @@ import Achievements from "./components/Achievements";
 import Events from "./components/Events";
 import Certificates from "./components/Certificates";
 import Community from "./components/Community";
+import About from "./components/About"
 import AdminUserManagement from "./components/AdminUserManagement";
 import App, { UserProvider } from "./App";
 import './index.css';
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <SignUp /> },
+      { path: "/about", element: <About /> },
 
       { path: "/profile", element: <Profile /> },
       { path: "/achievements", element: <Achievements /> },
