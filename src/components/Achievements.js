@@ -55,7 +55,7 @@ const Achievements = () => {
       </div>
 
       <div className="badges-section">
-        <h3>Badges</h3>
+        <h3>Achievements</h3>
         <div className="badges">
           {achievements.map((achievement) => (
             <div key={achievement.id} className="badge">
