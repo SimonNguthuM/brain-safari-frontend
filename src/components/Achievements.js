@@ -5,9 +5,9 @@ import "../achievements.css";
 const Achievements = () => {
   const [achievements, setAchievements] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
-  const [userPoints, setUserPoints] = useState(0);
   const { user } = useOutletContext();
   const username = user?.username;
+  const points = user?.points || 0;
 
   useEffect(() => {
     const fetchAchievements = async () => {
@@ -41,29 +41,10 @@ const Achievements = () => {
     fetchLeaderboard();
   }, []);
 
-  useEffect(() => {
-    const fetchUserPoints = async () => {
-      try {
-        const response = await fetch(
-          `http://127.0.0.1:5555/users/${username}/points`
-        );
-        const data = await response.json();
-        setUserPoints(data.points);
-      } catch (error) {
-        console.error("Error fetching points:", error);
-      }
-    };
-
-    if (username) {
-      fetchUserPoints();
-    }
-  }, [username]);
-
   if (!username) return null;
 
   return (
     <div className="achievements-dashboard">
-      {}
       <div className="profile-section">
         <div className="profile-circle">
           <span>{username.charAt(0).toUpperCase()}</span>
@@ -73,7 +54,6 @@ const Achievements = () => {
         <p>{username}@gmail.com</p>
       </div>
 
-      {}
       <div className="badges-section">
         <h3>Badges</h3>
         <div className="badges">
@@ -85,7 +65,6 @@ const Achievements = () => {
         </div>
       </div>
 
-      {}
       <div className="xp-points-section">
         <div className="xp-section">
           <h3>XP</h3>
@@ -97,11 +76,10 @@ const Achievements = () => {
         </div>
         <div className="points-section">
           <h3>Points</h3>
-          <p>{userPoints}</p> {}
+          <p>{points}</p>
         </div>
       </div>
 
-      {}
       <div className="leaderboard-section">
         <h3>Leaderboard</h3>
         <ul>
